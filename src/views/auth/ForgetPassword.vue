@@ -30,7 +30,40 @@
 </template>
 
 <script>
+import { ref } from 'vue'
+import { notify } from "@kyvg/vue3-notification"
+import { useStore } from 'vuex'
+
 export default {
   name: "ForgetPassword",
+  setup() {
+    const store = useStore()
+    const email = ref("")
+    const loading = ref(false)
+
+    const forgetPassword = () => {
+        loading.value = true
+
+        store
+            .dispatch('forgetPassword', {email: email.value})
+            .then(() => notify({
+                title: "Sucesso",
+                text: "Confira o seu e-mail",
+             }))
+            .catch(() =>  notify({
+                title: "Falha",
+                text: "Falha ao recuperar o usuário",
+                type: "warn"
+             }))
+            .finally(() => loading.value = false)
+    }
+
+    return {
+      email,
+      loading,
+      forgetPassword,
+      
+    }
+  }
 };
 </script>

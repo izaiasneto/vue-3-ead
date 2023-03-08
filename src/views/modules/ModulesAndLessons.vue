@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="pageTitle">
-            <span class="title">Curso X</span>
+            <span class="title">Meus Cursos</span>
             <span class="dots">
                 <span></span>
                 <span></span>
