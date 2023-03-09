@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="pageTitle">
-            <span class="title">Meus Cursos</span>
+            <span class="title">{{ course.name }}</span>
             <span class="dots">
                 <span></span>
                 <span></span>
@@ -28,12 +28,24 @@
 </template>
 
 <script>
+import { useStore } from 'vuex'
+import {computed } from 'vue'
+
 import Modules from '@/views/modules/components/Modules.vue'
 import Player from '@/views/modules/components/Player.vue'
 import SupportsLesson from '@/views/modules/components/SupportsLesson.vue'
 
 export default {
   name: "ModulesAndLessons",
+  setup() {
+    const store = useStore()
+
+    const course = computed(() => store.state.courses.courseSelected)
+
+    return {
+        course
+    }
+  },
   components: {
     Modules,
     Player,
