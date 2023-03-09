@@ -13,22 +13,47 @@
         <div class="comment">
           <div class="balloon">
             <span class="fas fa-sort-down"></span>
-            <span class="owner">{{ support.user.name }} - {{ support.dt_updated }}</span>
+            <span class="owner">{{ support.user.name }} - {{ support.date }}</span>
             <span class="text">{{ support.description }}</span>
           </div>
         </div>
-        <button class="btn primary">Ocultar respostas</button>
+        <button class="btn primary">
+            <span 
+              v-if="showSupport === support.id" 
+              @click.prevent="showSupport = '0'">
+                Ocultar respostas
+            </span>
+            <span
+              @click.prevent="showSupport = support.id"
+              v-else >
+                Exibir respostas ({{ support.replies.length }})
+            </span>
+        </button>
       </div>
-      <div class="answersContent" v-for="reply in support.replies" :key="reply.id"> 
-        <div class="commentContent rightContent">
-          <div class="comment">
+      <div class="answersContent" v-show="showSupport === support.id"> 
+        <div 
+          :class="[
+            'commentContent',
+            {'rightContent' : support.user.id != reply.user.id}
+          ]" 
+          v-for="reply in support.replies" 
+          :key="reply.id">
+            <span class="avatar" v-if="support.user.id === reply.user.id">
+              <img :src="[
+                        reply.user.image ?
+                        reply.user.image :
+                        require('@/assets/images/avatars/user01.svg')
+                    ]" 
+                    :alt="reply.user.name" />
+            </span>
+            <div class="comment">
             <div class="balloon">
               <span class="fas fa-sort-down"></span>
               <span class="owner">{{ reply.user.name}} - {{ reply.date }}</span>
               <span class="text">{{ reply.description }}</span>
             </div>
           </div>
-          <span class="avatar">
+          <span class="avatar" v-if="support.user.id != reply.user.id">
             <img :src="[
                       reply.user.image ?
                       reply.user.image :
@@ -36,21 +61,6 @@
                   ]" 
                   :alt="reply.user.name" />
           </span>
-        </div>
-        <div class="commentContent">
-          <span class="avatar">
-            <img src="@/assets/images/avatars/user01.svg" alt="" />
-          </span>
-          <div class="comment">
-            <div class="balloon">
-              <span class="fas fa-sort-down"></span>
-              <span class="owner">Fernando - 07/10/2021</span>
-              <span class="text">
-                In eleifend urna sapien, faucibus pharetra justo luctus quis.
-                Vivamus eleifend fringilla massa
-              </span>
-            </div>
-          </div>
         </div>
         <span class="answer">
           <button class="btn primary">Responder</button>
@@ -61,7 +71,7 @@
 </template>
 
 <script>
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import { useStore } from 'vuex'
 
 export default {
@@ -69,10 +79,13 @@ export default {
     setup() {
       const store = useStore()
 
+      const showSupport = ref('0')
+
       const supports = computed(() => store.state.supports.supports)
 
       return {
-        supports
+        supports,
+        showSupport
       }
     }
 }
