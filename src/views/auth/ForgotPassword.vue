@@ -13,7 +13,7 @@
     <button
       :class="['btn', 'primary', loading ? 'loading' : '']"
       type="submit"
-      @click.prevent="forgetPassword"
+      @click.prevent="forgotPassword"
     >
       <span v-if="loading">Recuperando...</span>
       <span v-else>Recuperar Senha</span>
@@ -35,17 +35,17 @@ import { notify } from "@kyvg/vue3-notification"
 import { useStore } from 'vuex'
 
 export default {
-  name: "ForgetPassword",
+  name: "ForgotPassword",
   setup() {
     const store = useStore()
     const email = ref("")
     const loading = ref(false)
 
-    const forgetPassword = () => {
+    const forgotPassword = () => {
         loading.value = true
 
         store
-            .dispatch('forgetPassword', {email: email.value})
+            .dispatch('forgotPassword', {email: email.value})
             .then(() => notify({
                 title: "Sucesso",
                 text: "Confira o seu e-mail",
@@ -61,7 +61,7 @@ export default {
     return {
       email,
       loading,
-      forgetPassword,
+      forgotPassword,
       
     }
   }

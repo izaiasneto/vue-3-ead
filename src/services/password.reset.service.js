@@ -3,7 +3,7 @@ import { TOKEN_NAME } from '@/configs'
 
 export default class ResetPasswordService extends BaseService{
 
-    static async forgetPassword (params) {
+    static async forgotPassword (params) {
         return new Promise((resolve, reject) => {
             this.request()
                 .post('/forgot-password', params)

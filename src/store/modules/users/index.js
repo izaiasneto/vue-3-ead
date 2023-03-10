@@ -40,9 +40,8 @@ export default {
                         .finally(() => commit('CHANGE_LOADING', false))
         },
 
-        forgetPassword ({state}, params) {
-            state.loggedIn
-            return ResetPasswordService.forgetPassword(params)
+        forgotPassword (_, params) {
+            return ResetPasswordService.forgotPassword(params)
         },
     }
 

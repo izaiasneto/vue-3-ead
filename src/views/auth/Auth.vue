@@ -24,7 +24,7 @@
   <span>
     <p class="fontSmall">
       Esqueceu sua senha?
-      <router-link :to="{ name: 'forget.password' }" class="link primary"
+      <router-link :to="{ name: 'forgot.password' }" class="link primary"
         >Clique aqui</router-link
       >
     </p>
