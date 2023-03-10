@@ -6,10 +6,16 @@ import supports from './modules/supports'
 
 export default createStore({
   state: {
+    loading: false,
+    loadingMessage: 'Carregando...'
   },
   getters: {
   },
   mutations: {
+    CHANGE_LOADING (state, status, msg = 'Carregando...') {
+      state.loading = status
+      state.loadingMessage = msg
+    }
   },
   actions: {
   },
