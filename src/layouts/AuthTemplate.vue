@@ -9,7 +9,9 @@
       <div class="loginCard">
         <div
           class="decor"
-          style="background-image: url('./assets/images/building.jpg')"
+          :style="{
+            backgroundImage: 'url(' + require('@/assets/images/building.jpg') + ')',
+          }"
         >
           <div class="content">
             <span class="logo">
