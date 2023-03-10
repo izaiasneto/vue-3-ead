@@ -23,11 +23,7 @@
               @click.prevent="showSupport = '0'">
                 Ocultar respostas
             </span>
-            <span
-              @click.prevent="showSupport = support.id"
-              v-else >
-                Exibir respostas ({{ support.replies.length }})
-            </span>
+            <span v-else @click.prevent="showSupport = support.id">Exibir respostas ({{ support.replies.length }})</span>
         </button>
       </div>
       <div class="answersContent" v-show="showSupport === support.id"> 
@@ -63,16 +59,28 @@
           </span>
         </div>
         <span class="answer">
-          <button class="btn primary">Responder</button>
+          <button class="btn primary" @click.prevent="openModal(support.id)">
+            Responder
+          </button>
         </span>
       </div>
     </div>
+
+    <support-modal
+      :show-modal="modal.showModal"
+      :support-reply="modal.supportReply"
+      @closeModal="modal.showModal = false"
+    >   
+    </support-modal>
+
   </div>
 </template>
 
 <script>
 import { computed, ref } from 'vue'
 import { useStore } from 'vuex'
+
+import SupportModal from './SupportModal.vue'
 
 export default {
     name: 'Supports',
@@ -83,10 +91,22 @@ export default {
 
       const supports = computed(() => store.state.supports.supports)
 
+      const modal = ref({
+          showModal: false,
+          supportReply: ''
+      })
+
+      const openModal = (supportId) => modal.value = {showModal: true, supportReply: supportId}
+
       return {
         supports,
-        showSupport
+        showSupport,
+        modal,
+        openModal
       }
-    }
+  },
+  components: {
+    SupportModal,
+  }
 }
 </script>

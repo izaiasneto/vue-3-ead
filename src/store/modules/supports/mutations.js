@@ -15,9 +15,24 @@ const mutations = {
         }
     },
 
-    ADD_NEW_SUPPORTS (state, support) {
+    ADD_NEW_SUPPORT (state, support) {
         state.supports.data.unshift(support)
     },
+
+    ADD_NEW_REPLY_TO_SUPPORT (state, data) {
+        const reply = data.reply
+        const supportId = data.supportId
+        const supports = state.supports.data
+        console.log(supports)
+
+        supports.forEach((support, index) => {
+            if(support.id === supportId) {
+                supports[index].replies.push(reply)
+            }
+        } )
+
+        state.supports.data = supports
+    }
 
     
 }

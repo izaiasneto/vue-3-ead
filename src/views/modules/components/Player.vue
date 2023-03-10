@@ -18,7 +18,7 @@
       v-if="lesson.video"
       width="100%"
       height="auto"
-      :src="lesson.video = 'https://www.youtube.com/embed/iKBjspDI9Tg'" 
+      :src="lesson.video" 
       :title="lesson.name"
       frameborder="0"
       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

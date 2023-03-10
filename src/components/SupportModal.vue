@@ -42,7 +42,7 @@
               <button
                 v-if="description.length > 3"
                 class="btn primary text-white animate__animated animate__bounceIn"
-                :class="{ disabled: loading }"
+                :class="{disabled: loading}"
                 :disabled="loading"
                 type="submit"
               >
@@ -59,7 +59,8 @@
 </template>
 
 <script>
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
+import { useStore } from 'vuex'
 
 export default {
     name: "SupportModal",
@@ -76,17 +77,37 @@ export default {
         }
     },
     emit: ['closeModal'],
-    setup() {
+    setup(props, {emit} ) {
 
-        const textarea = ref('')
+        const store = useStore()
+        const lesson = computed(() => store.state.courses.lessonPlayer)
+        const description = ref('')
         const loading = ref(false)
 
         const sendForm = () => {
+            loading.value = true
 
+            const params = {
+                lesson: lesson.value.id,
+                description: description.value,
+                status: 'P',
+                support:  props.supportReply
+            }
+            
+            let actionName = 'createSupport'
+            if(props.supportReply != '') 
+              actionName= 'createNewReplySupport'
+
+            store.dispatch(actionName, params)
+                    .then(() => {
+                      description.value = ''
+                      emit('closeModal')
+                })
+                .finally(() => loading.value = false)
         }
         
         return{
-            textarea,
+            description,
             loading,
             sendForm
         }
