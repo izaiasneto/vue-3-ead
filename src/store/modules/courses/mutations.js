@@ -3,15 +3,15 @@ const mutations = {
         state.myCourses = myCourses
     },
 
-    SET_COURSE_SELECTED(state, course) {
+    SET_COURSE_SELECTED (state, course) {
         state.courseSelected = course
     },
 
-    SET_LESSON_PLAYER(state, lesson) {
+    SET_LESSON_PLAYER (state, lesson) {
         state.lessonPlayer = lesson
     },
 
-    REMOVE_LESSON_PLAYER(state) {
+    REMOVE_LESSON_PLAYER (state) {
         state.lessonPlayer = {
             id: '',
             name: '',
@@ -21,6 +21,17 @@ const mutations = {
         }
     },
 
+    'ADD_NEW_VIEW_LESSON' (state) {
+        const modules = state.courseSelected.modules
+
+        modules.forEach((module) => {
+            module.lessons.forEach( (lesson) => {
+                if (lesson.id === state.lessonPlayer.id) {
+                    lesson.views.push({})
+                }
+            })
+        })
+    }
 
 
 }
