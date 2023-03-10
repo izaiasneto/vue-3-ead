@@ -13,13 +13,13 @@
     <div class="groupForm">
       <i class="far fa-key"></i>
       <input
-        type="password"
+        :type="typePassword"
         name="password"
         placeholder="Senha"
         v-model="password"
         required
       />
-      <i class="far fa-eye buttom"></i>
+      <i class="far fa-eye buttom" @click.prevent="toggleTypePassword"></i>
     </div>
     <button
       :class="['btn', 'primary', loading ? 'loading' : '']"
@@ -36,6 +36,7 @@
 import { ref } from "vue";
 import { notify } from "@kyvg/vue3-notification"
 import router from "@/router";
+
 import ResetPasswordService from "@/services/password.reset.service";
 
 export default {
@@ -50,6 +51,10 @@ export default {
     const email = ref("");
     const password = ref("");
     const loading = ref(false);
+
+    const typePassword = ref('password')
+
+    const toggleTypePassword = () => typePassword.value = typePassword.value === 'password' ? 'text' : 'password'
 
     const resetPassword = () => {
       loading.value = true;
@@ -80,6 +85,8 @@ export default {
       loading,
       password,
       resetPassword,
+      typePassword,
+      toggleTypePassword
     };
   },
 };
