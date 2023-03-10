@@ -28,6 +28,7 @@
 </template>
 
 <script>
+import router from '@/router'
 import { useStore } from 'vuex'
 import {computed } from 'vue'
 
@@ -35,12 +36,17 @@ import Modules from '@/views/modules/components/Modules.vue'
 import Player from '@/views/modules/components/Player.vue'
 import SupportsLesson from '@/views/modules/components/SupportsLesson.vue'
 
+
 export default {
   name: "ModulesAndLessons",
   setup() {
     const store = useStore()
 
     const course = computed(() => store.state.courses.courseSelected)
+
+    if (course.value.id === '') {
+            router.push({name: 'campus.home'})
+    }
 
     return {
         course
