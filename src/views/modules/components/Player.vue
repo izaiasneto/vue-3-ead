@@ -1,10 +1,6 @@
 <template>
   <div class="training">
     <div class="card bg-laravel">
-     
-      <span class="icon">
-        <img src="images/icons/laravel.svg" alt="" />
-      </span>
       
       <span class="title">{{ lesson.name }}</span>
       

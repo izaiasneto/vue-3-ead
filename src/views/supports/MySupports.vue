@@ -8,7 +8,7 @@
         <span></span>
       </span>
     </div>
-
+    
     <div class="content">
       <div class="container">
         <div class="left">
@@ -27,6 +27,7 @@
           </div>
         </div>
         <div class="right">
+          <span class="title-total">Total ({{ mySupports.meta.total }}) </span>
           <div class="content">
             <div class="comments">
               <supports />

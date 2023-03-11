@@ -111,7 +111,7 @@
   /* Pagination 2 */
   .pagination-2 .page-number {
     padding: 8px 16px;
-    background-color: #f3f4f2;
+    background-color: #646464;;
   }
   
   .pagination-2 .page-number:hover {
@@ -120,14 +120,18 @@
   
   .pagination-2 .active {
     border-radius: 4px;
-    background-color: #16425b;
+    background-color: #8331a5;
   }
   
   .pagination-2 .active:hover {
-    background-color: #16425b;
+    background-color: #fff;
   }
   
   .pagination-2 .active a {
     color: #f3f4f2;
+  }
+
+  .pagination-2 .active a:hover {
+    color: #8331a5;
   }
   </style>

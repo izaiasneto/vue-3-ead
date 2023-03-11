@@ -67,7 +67,7 @@ section#loginPage {
         .copyright {
           position: absolute;
           color: $textColorLight;
-          bottom: 10px;
+          bottom: 24px;
           font-weight: 300;
         }
       }
@@ -203,7 +203,7 @@ section#loginPage {
 }
 
 ul#mainMenu {
-  background: #8331a5;
+  background: #8331a5e6;
   min-height: calc(100vh - #{$navSize});
   width: 220px;
   padding: 70px 1rem 0 1rem;
@@ -414,7 +414,7 @@ body.page {
   padding: 10px;
   color: #FFF;
   border-radius: 5px;
-  margin: 6px 0 40px 0;
+  margin: 14px 0 40px 0;
 }
 
 section .container {
@@ -552,6 +552,15 @@ section .container {
 
   .right {
     width: 80%;
+
+    .title-total {
+      color: #fff;
+      font-size: 16px;
+      margin-left: 11px;
+      padding: 5px;
+      background: #ff8a3b;
+      border-radius: 4px;
+    }
 
     .content {
       margin: 0 0.5rem;
