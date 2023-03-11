@@ -41,7 +41,7 @@ export default {
       const store = useStore()
 
       const lesson = computed(() => store.state.courses.lessonPlayer)
-      const page = computed(() => store.state.supports.supports.meta.page)
+      //const pageTotal = computed(() => store.state.supports.supports.meta.total)
       const supports = computed(() => store.state.supports.supports) // module/state - Support
       const supportsTotal = computed(()=> store.state.supports.supports.meta.total)
       const loading = ref(false)
@@ -59,15 +59,17 @@ export default {
         () => {
           loading.value = true
           
-          store.dispatch('getSupportsOfLesson', { lesson: lesson.value.id, page})
+          store.dispatch('getSupportsOfLesson', {lesson: lesson.value.id})
                 .finally(() => loading.value = false)
         }
       )
 
-      const changePage = (page) => store.dispatch('getSupportsOfLesson', {
-        lesson: lesson.value.id,
-        page
-      })
+      const changePage = (page) => {
+        store.dispatch('getSupportsOfLesson', {
+          lesson: lesson.value.id,
+          page
+        })
+      }
       
 
       return {

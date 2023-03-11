@@ -35,6 +35,7 @@
 <script>
 import { useStore } from "vuex";
 import { computed, ref} from "vue";
+import router from '@/router';
 
 export default {
   name: "Modules",
@@ -52,6 +53,8 @@ export default {
     const addLessonInPlayer = (lesson) => {
       store.commit('SET_LESSON_PLAYER', lesson)
     }
+
+    if(router.currentRoute != 'campus.module')  store.commit('REMOVE_LESSON_PLAYER')
 
     return {
       modules,
